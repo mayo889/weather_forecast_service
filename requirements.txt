@@ -1,0 +1,16 @@
+apscheduler
+Flask
+flask_prometheus_metrics
+lxml
+numpy
+pandas
+plotly
+prometheus_client
+prophet
+pymongo
+pytest
+requests
+scikit_learn
+swagger-ui-py
+tqdm
+Werkzeug

@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: pipeline
+  name: pipeline
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: pipeline
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.network/my-bridge: "true"
+        io.kompose.service: pipeline
+    spec:
+      containers:
+        - args:
+            - bash
+            - -c
+            - airflow standalone && airflow dags unpause dmls
+          image: europe-central2-docker.pkg.dev/dmls-deployment/dmls-repo/dmls-pipeline-test:v0
+          name: pipeline
+          ports:
+            - containerPort: 8080
+          resources: {}
+          volumeMounts:
+            - mountPath: /opt/content
+              name: content-volume
+            - mountPath: /opt/models
+              name: models-volume
+      restartPolicy: Always
+      volumes:
+        - name: content-volume
+          persistentVolumeClaim:
+            claimName: content-volume
+        - name: models-volume
+          persistentVolumeClaim:
+            claimName: models-volume
+status: {}

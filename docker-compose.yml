@@ -1,0 +1,81 @@
+version: '3.9'
+
+networks:
+  my_bridge:
+    driver: bridge
+    name: my_bridge
+
+services:
+
+  database:
+    container_name: database
+    image: mongo
+    networks:
+      - my_bridge
+
+  database_filler:
+    container_name: database_filler
+    build: database_filler/
+    command: python /scripts/filler.py
+    volumes:
+      - ./data/:/data
+    networks:
+      - my_bridge
+    depends_on:
+      - database
+
+  server:
+    container_name: server
+    build: server/
+    ports:
+      - "10121:8000"
+    command: python /scripts/server.py
+    networks:
+      - my_bridge
+    volumes:
+      - content-volume:/scripts/static/content
+      - models-volume:/scripts/static/models
+
+  pipeline:
+    container_name: pipeline
+    build: pipeline/
+    ports:
+      - "10122:8080"
+    command: >
+      bash -c "airflow standalone 
+      && airflow dags unpause dmls"
+    networks:      
+      - my_bridge
+    volumes:
+      - content-volume:/opt/content
+      - models-volume:/opt/models
+      - ./data/:/opt/data_backup
+
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    networks:
+      - my_bridge
+    volumes:
+      - "./infra/metrics/prometheus.yml:/etc/prometheus/prometheus.yml"
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:5.1.0
+    volumes:
+      - ./infra/metrics/grafana/config.ini:/etc/grafana/grafana.ini
+      - ./infra/metrics/grafana/datasource.yaml:/etc/grafana/provisioning/datasources/default.yaml
+      - ./infra/metrics/grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/default.yaml
+      - ./infra/metrics/grafana/dashboards:/var/lib/grafana/dashboards
+    ports:
+      - 3000:3000
+    depends_on:
+      - prometheus
+    networks:
+      - my_bridge
+
+volumes:
+  content-volume:
+  models-volume:

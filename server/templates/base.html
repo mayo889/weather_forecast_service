@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Weather forecast</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css"
+          href= "{{ url_for('static',filename='styles/style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/main_logo.png') }}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo_menu">
+                <a href="{{ url_for('main_page') }}"><img src="static/images/main_logo.png" alt="logo-photo"></a>
+            </div>
+            <div class="header_menu">
+                <ul class="menu">
+                    <li><a href="{{ url_for('main_page') }}">Главная</a></li>
+                    <li><a href="{{ url_for('history_page') }}">История</a></li>
+                    <li><a href="{{ url_for('contacts_page') }}">Контакты</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="content">
+            {% block content %} {% endblock %}            
+        </div>
+        <div class="footer">
+            &copy; Все права защищены
+        </div>
+    </div>
+</body>
+
+</html>

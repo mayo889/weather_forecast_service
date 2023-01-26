@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>Прогноз температуры в г. Москва</h3>
+<p>Сегодня: {{ today_date }}</p>
+
+<table class="prediction_table">
+<tbody>
+    <tr>
+        {% for pred in preds %}
+        <td colspan="2">{{ pred.date }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for pred in preds %}
+        <td>день</td>
+        <td>вечер</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for pred in preds %}
+        <td>{{ pred.day_temp }}°C</td>
+        <td>{{ pred.evening_temp }}°C</td>
+        {% endfor %}
+    </tr>
+</tbody>
+</table>
+
+<h3>История предсказаний</h3>
+<div>{{ graph_preds | safe}}</div>
+
+<h3>История изменения метрик</h3>
+<div>{{ graph_metrics | safe}}</div>
+
+{% endblock %}

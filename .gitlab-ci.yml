@@ -1,0 +1,18 @@
+default:
+  tags:
+    - ubuntu_pc
+  services:
+    - name: mongo
+      alias: database
+
+image:
+  name: "registry.gitlab.com/mayo889/dmls:latest"
+
+stages:
+  - test
+
+
+python_test:
+  script:
+    - pytest
+    - pytest server/test_api.py 

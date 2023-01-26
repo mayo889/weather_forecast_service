@@ -1,0 +1,205 @@
+:root {
+    --bg-color: #f8f8f8;
+    --div-color: #d3d3d3;
+    --border-color: #0000ff;
+}
+
+body {
+    background-color: var(--bg-color);
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.header {
+    position: relative;
+    height: 58px;
+    border-bottom: 2px solid  var(--border-color);
+}
+
+.logo_menu img {
+    width: 58px;
+    height: 58px;
+}
+
+.logo_menu {
+    position: absolute;
+    width: 58px;
+    height: 58px;
+    margin-left: 20px;
+}
+
+.header_menu {
+    height: 58px;
+}
+
+.content {
+    margin: 20px 0;
+}
+
+h2,
+h1 {
+    text-align: center;
+    overflow: hidden;
+}
+
+h1 {
+    font-size: 60px;
+}
+
+h2 {
+    font-size: 40px;
+}
+
+h3 {
+    font-size: 25px;
+}
+
+body {
+    font-size: 18px;
+}
+
+.footer {
+    height: 30px;
+    background-color: var(--div-color);
+    text-align: right;
+    padding-right: 50px;
+    padding-top: 15px;
+    border-top: 2px solid var(--border-color);
+    clear: both;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+	vertical-align: middle;
+}
+
+th, td {
+    border: 1px solid black;
+    text-align: center;
+}
+
+
+/* styles of index page */
+
+.prediction_table {
+    width: 80%;
+}
+
+.prediction_table td {
+    height: 25px;
+}
+
+/* end styles of index page */
+
+
+/* styles of header */
+
+.menu {
+    list-style: none;
+    margin: 0px;
+    padding: 17.6px 0;
+    text-align: right;
+    background-color: var(--div-color);
+}
+
+.menu li {
+    display: inline-block;
+}
+
+.menu li a {
+    text-decoration: none;
+    font-family: sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    text-transform: uppercase;
+    position: relative;
+    padding: 17.6px 50px;
+    transition: color .4s;
+}
+
+.menu li:before {
+    content: "|";
+    font-size: 20px;
+    color: var(--border-color);
+}
+
+.menu li a,
+.menu li a:visited {
+    color: #696969;
+}
+
+.menu li a:hover {
+    color: var(--border-color);
+}
+
+.menu a:before,
+.menu a:after {
+    content: "";
+    position: absolute;
+    height: 5px;
+    right: 50%;
+    bottom: 0;
+    left: 50%;
+    background: var(--border-color);
+    transition: .4s;
+}
+
+.menu a:hover:before {
+    left: 0px;
+}
+
+.menu a:hover:after {
+    right: 0;
+}
+
+/* end styles of header */
+
+
+/* styles of history page */
+
+.history_table {
+    width: 25%;
+}
+
+.history_table td {
+    height: 25px;
+    text-align: right;
+    padding-right: 45px;
+}
+
+.history_table thead {
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    padding-right: 0px;
+}
+
+.history_table tbody tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+.history_table tbody tr:nth-child(even) {
+    background-color: #eee;
+}
+
+.history_form {
+    font-size: 20px; 
+}
+
+/* end styles of history page */
+
+
+/* styles of contacts page */
+
+.authors {
+    font-size: 20px;
+}
+
+/* end styles of contacts page */

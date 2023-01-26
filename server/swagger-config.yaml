@@ -1,0 +1,73 @@
+openapi: 3.0.3
+info:
+  title: Предсказание температуры
+  description: |-
+    Описание эндпоинтов flask-server'а по предсказанию температуры.
+  version: 1.0.0
+paths:
+  /:
+    get:
+      tags:
+        - /
+      summary: Получение главной страницы с таблицей предсказания температуры
+      responses:
+        '200':
+          description: Successful operation
+
+  /api/predictions:
+    get:
+      tags:
+        - /
+      summary: Получить предсказания на месяц
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/predictions_response'
+
+  /api/predictions/<day>:
+    get:
+      tags:
+        - /
+      summary: Получение предсказания на конкретный день
+      parameters:
+        - name: day
+          in: query
+          description: День, для которого нужно найти предсказание
+          required: false
+          schema:
+            type: number
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/predictions_by_day_response'
+
+
+components:
+  schemas:
+    predictions_response:
+      type: array
+      items:
+        type: object
+        properties:
+          date:
+            type: string
+          day_temp:
+            type: number
+          evening_temp:
+            type: number
+
+    predictions_by_day_response:
+        type: object
+        properties:
+          date:
+            type: string
+          day_temp:
+            type: number
+          evening_temp:
+            type: number

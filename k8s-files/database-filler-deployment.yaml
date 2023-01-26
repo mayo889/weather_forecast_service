@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: database-filler
+  name: database-filler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: database-filler
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        io.kompose.network/my-bridge: "true"
+        io.kompose.service: database-filler
+    spec:
+      containers:
+        - image: europe-central2-docker.pkg.dev/dmls-deployment/dmls-repo/dmls-database-filler-test:v0
+          name: database-filler
+          ports:
+            - containerPort: 10123
+          resources: {}
+      restartPolicy: Always
+status: {}

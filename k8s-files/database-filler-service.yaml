@@ -1,0 +1,18 @@
+apiVersion: v1
+
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: database-filler
+  name: database-filler
+
+spec:
+  ports:
+    - name: "10123"
+      port: 10123
+      targetPort: 10123
+  selector:
+    io.kompose.service: database-filler
+
+status:
+  loadBalancer: {}

@@ -1,0 +1,11 @@
+__pycache__
+venv
+env
+.pytest_cache
+
+my_utils
+
+server/static/content/*.html
+server/static/content/*.json
+tests/content/
+data/*.csv

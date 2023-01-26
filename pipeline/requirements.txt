@@ -1,0 +1,8 @@
+lxml
+numpy
+pandas
+plotly
+prophet
+pymongo
+requests
+scikit_learn
